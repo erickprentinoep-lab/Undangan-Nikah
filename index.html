@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wedding of Raja & Ratu</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'batak-red': '#5c0909',
+                        'batak-red-light': '#a61c1c',
+                        'batak-gold': '#d4af37',
+                        'batak-dark': '#0f0f0f', /* Darker for contrast */
+                        'batak-cream': '#fdfbf7'
+                    },
+                    fontFamily: {
+                        'serif': ['"Playfair Display"', 'serif'],
+                        'sans': ['"Lato"', 'sans-serif'],
+                    },
+                    animation: {
+                        'fadeInUp': 'fadeInUp 1.2s ease-out forwards',
+                        'spin-slow': 'spin 15s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 3s infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { textShadow: '0 0 10px #d4af37, 0 0 20px #d4af37' },
+                            '50%': { textShadow: '0 0 20px #d4af37, 0 0 30px #ff0000' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Gorga-inspired CSS Pattern */
+        .gorga-border {
+            background-image: repeating-linear-gradient(45deg, #5c0909 25%, transparent 25%, transparent 75%, #5c0909 75%, #5c0909), repeating-linear-gradient(45deg, #5c0909 25%, #1a1a1a 25%, #1a1a1a 75%, #5c0909 75%, #5c0909);
+            background-position: 0 0, 10px 10px;
+            background-size: 20px 20px;
+        }
+
+        .ulos-bg {
+            background-color: #5c0909;
+            background-image: repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(212, 175, 55, 0.1) 50px, rgba(212, 175, 55, 0.1) 53px),
+                repeating-linear-gradient(0deg, transparent, transparent 50px, rgba(212, 175, 55, 0.1) 50px, rgba(212, 175, 55, 0.1) 53px);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Corner Gorga Ornaments */
+        .ornament {
+            position: fixed;
+            width: 150px;
+            height: 150px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Gorga_Batak_Toba.svg/1024px-Gorga_Batak_Toba.svg.png');
+            /* Placeholder SVG Gorga */
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 40;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .ornament-tl {
+            top: -20px;
+            left: -20px;
+            transform: rotate(180deg);
+        }
+
+        .ornament-tr {
+            top: -20px;
+            right: -20px;
+            transform: scaleX(-1) rotate(180deg);
+        }
+
+        .ornament-bl {
+            bottom: -20px;
+            left: -20px;
+        }
+
+        .ornament-br {
+            bottom: -20px;
+            right: -20px;
+            transform: scaleX(-1);
+        }
+
+        /* Hide scrollbar */
+        ::-webkit-scrollbar {
+            width: 0px;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-batak-dark text-batak-cream antialiased overflow-x-hidden selection:bg-batak-gold selection:text-batak-dark">
+
+    <!-- SoundCloud Widget API -->
+    <script src="https://w.soundcloud.com/player/api.js"></script>
+
+    <!-- SoundCloud Iframe (Hidden) -->
+    <iframe id="sc-widget" class="hidden" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/joe-silalahi-221084110/dongan-matua-teman-hidup-enny&color=%23d4af37&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&loop=true">
+    </iframe>
+
+    <!-- Floating Corner Ornaments (Always Visible) -->
+    <div class="ornament ornament-tl"></div>
+    <div class="ornament ornament-tr"></div>
+    <div class="ornament ornament-bl"></div>
+    <div class="ornament ornament-br"></div>
+
+    <!-- Overlay -->
+    <section id="overlay"
+        class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-batak-dark bg-cover bg-center transition-all duration-1500 ease-in-out"
+        style="background-image: url('https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=2070&auto=format&fit=crop');">
+        <div class="absolute inset-0 bg-black/80"></div>
+        <!-- Decorative border for overlay -->
+        <div class="absolute inset-4 border border-batak-gold/30 z-20 pointer-events-none"></div>
+        <div class="absolute inset-6 border border-batak-gold/10 z-20 pointer-events-none"></div>
+
+        <div class="relative z-30 text-center p-10 max-w-lg w-full mx-4 animate-fadeInUp">
+            <div class="mb-6 flex justify-center">
+                <i class="fas fa-crown text-4xl text-batak-gold animate-float"></i>
+            </div>
+            <h2 class="text-xl md:text-2xl text-batak-gold mb-4 font-serif tracking-[0.3em] uppercase">The Wedding of
+            </h2>
+            <h1
+                class="text-6xl md:text-8xl font-bold mb-8 font-serif text-white drop-shadow-[0_5px_5px_rgba(0,0,0,0.5)] animate-pulse-glow">
+                Raja <span class="text-batak-red italic">&</span> Ratu</h1>
+            <p class="text-white/80 mb-10 italic font-light tracking-wide">Kepada Bpk/Ibu/Saudara/i</p>
+            <button id="open-btn"
+                class="group relative px-10 py-4 bg-transparent border-2 border-batak-gold text-batak-gold font-bold rounded-none hover:bg-batak-gold hover:text-batak-dark transition-all duration-500 overflow-hidden tracking-widest uppercase">
+                <span class="relative z-10 flex items-center justify-center gap-3">Buka Undangan</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="hidden opacity-0 transition-opacity duration-1000 ease-in" id="main-content">
+
+
+        <!-- Hero Section -->
+        <section id="hero" class="min-h-screen relative flex items-center justify-center bg-fixed bg-cover bg-center"
+            style="background-image: url('assets/hero.jpg');">
+            <div class="absolute inset-0 bg-gradient-to-b from-batak-dark/30 via-batak-dark/20 to-batak-dark"></div>
+            <div class="relative z-10 text-center px-4 pt-20">
+                <div class="mb-6 animate-pulse">
+                    <i class="fas fa-dove text-4xl text-batak-gold/80"></i>
+                </div>
+                <p class="text-lg md:text-xl text-batak-gold mb-2 tracking-[0.2em] uppercase font-light">The Wedding
+                    Celebration of</p>
+                <h1 class="text-6xl md:text-8xl font-bold mb-4 font-serif text-white drop-shadow-2xl">Raja <span
+                        class="text-batak-gold">&</span> Ratu</h1>
+                <p class="text-xl md:text-2xl italic mb-12 text-gray-200">Sabtu, 20 November 2026</p>
+
+                <!-- Countdown -->
+                <div class="flex flex-wrap justify-center gap-4 md:gap-8 mb-12">
+                    <div class="glass-card px-4 py-3 min-w-[80px] rounded-lg">
+                        <span class="block text-3xl md:text-4xl font-bold text-batak-gold" id="days">00</span>
+                        <span class="text-xs uppercase tracking-wider">Hari</span>
+                    </div>
+                    <div class="glass-card px-4 py-3 min-w-[80px] rounded-lg">
+                        <span class="block text-3xl md:text-4xl font-bold text-batak-gold" id="hours">00</span>
+                        <span class="text-xs uppercase tracking-wider">Jam</span>
+                    </div>
+                    <div class="glass-card px-4 py-3 min-w-[80px] rounded-lg">
+                        <span class="block text-3xl md:text-4xl font-bold text-batak-gold" id="minutes">00</span>
+                        <span class="text-xs uppercase tracking-wider">Menit</span>
+                    </div>
+                    <div class="glass-card px-4 py-3 min-w-[80px] rounded-lg">
+                        <span class="block text-3xl md:text-4xl font-bold text-batak-gold" id="seconds">00</span>
+                        <span class="text-xs uppercase tracking-wider">Detik</span>
+                    </div>
+                </div>
+
+                <div class="animate-bounce mt-8">
+                    <i class="fas fa-chevron-down text-batak-gold text-2xl"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Invitation Description Section -->
+        <section id="invitation" class="py-20 px-4 bg-batak-dark relative overflow-hidden">
+            <!-- Decorative Gorga Pattern Background -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/8/88/Gorga_Batak_Toba.svg')] bg-repeat"
+                    style="background-size: 300px;"></div>
+            </div>
+
+            <!-- Top & Bottom Ulos Border -->
+            <div class="absolute top-0 left-0 right-0 h-3 bg-gradient-to-r from-batak-red via-batak-gold to-batak-red">
+            </div>
+            <div
+                class="absolute bottom-0 left-0 right-0 h-3 bg-gradient-to-r from-batak-red via-batak-gold to-batak-red">
+            </div>
+
+            <div class="max-w-4xl mx-auto text-center relative z-10">
+                <!-- Traditional Greeting -->
+                <div class="mb-8 animate-fadeInUp">
+                    <div class="inline-block px-6 py-2 border-2 border-batak-gold/50 rounded-full mb-6">
+                        <p class="text-batak-gold text-sm tracking-[0.3em] uppercase font-light">Horas! Mauliate ma di
+                            Halak Nasomartuah</p>
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-serif text-batak-gold mb-6 leading-relaxed"
+                        style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
+                        Undangan Pernikahan
+                    </h2>
+                </div>
+
+                <!-- Decorative Divider -->
+                <div class="flex items-center justify-center gap-4 mb-8">
+                    <div class="h-px w-16 bg-gradient-to-r from-transparent to-batak-gold"></div>
+                    <i class="fas fa-infinity text-batak-gold text-2xl"></i>
+                    <div class="h-px w-16 bg-gradient-to-l from-transparent to-batak-gold"></div>
+                </div>
+
+                <!-- Main Description -->
+                <div class="glass-card p-8 md:p-12 rounded-lg animate-fadeInUp" style="animation-delay: 0.2s;">
+                    <p class="text-gray-300 text-lg md:text-xl leading-relaxed mb-6 italic">
+                        "Molo so ra pamasu-masu, ise so mamasuhon pangalaho?"
+                    </p>
+                    <p class="text-gray-400 text-sm mb-8">
+                        (Tanpa kerja keras, siapa yang akan menuai kesuksesan?)
+                    </p>
+
+                    <div class="h-px w-24 bg-batak-gold/50 mx-auto mb-8"></div>
+
+                    <p class="text-gray-200 text-base md:text-lg leading-relaxed mb-6">
+                        Dengan hormat,
+                        Dengan kerendahan hati dan puji syukur serta suku cita atas berkat dan kasih Tuhan, bersama ini
+                        kami mengundang Bapak/Ibu/Saudara/i, agar sudi kiranya meringankan langkah untuk menghadiri
+                        ACARA PESTA PEMBERKATAN PERNIKAHAN kami:
+                    </p>
+
+                    <div class="flex items-center justify-center gap-6 my-8">
+                        <div class="text-center">
+                            <div
+                                class="w-16 h-16 mx-auto mb-3 bg-batak-red/20 rounded-full flex items-center justify-center border-2 border-batak-gold">
+                                <i class="fas fa-male text-batak-gold text-2xl"></i>
+                            </div>
+                            <p class="text-batak-gold font-serif text-xl">Raja Batak</p>
+                        </div>
+                        <div class="text-4xl text-batak-gold/50 font-serif">&</div>
+                        <div class="text-center">
+                            <div
+                                class="w-16 h-16 mx-auto mb-3 bg-batak-red/20 rounded-full flex items-center justify-center border-2 border-batak-gold">
+                                <i class="fas fa-female text-batak-gold text-2xl"></i>
+                            </div>
+                            <p class="text-batak-gold font-serif text-xl">Ratu Uli</p>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-300 text-base leading-relaxed">
+                        Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i
+                        berkenan hadir untuk memberikan doa restu kepada kedua mempelai.
+                    </p>
+                </div>
+
+                <!-- Bottom Ornament -->
+                <div class="mt-10 flex justify-center gap-3">
+                    <i class="fas fa-leaf text-batak-gold/40 text-xl transform rotate-45 animate-pulse"></i>
+                    <i class="fas fa-spa text-batak-gold/60 text-2xl animate-pulse" style="animation-delay: 0.3s;"></i>
+                    <i class="fas fa-leaf text-batak-gold/40 text-xl transform -rotate-45 animate-pulse"
+                        style="animation-delay: 0.6s;"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Couple Section -->
+        <section id="couple" class="py-24 px-4 relative overflow-hidden bg-batak-dark">
+            <!-- Animated Ulos Background -->
+            <div class="absolute inset-0 opacity-20 pointer-events-none">
+                <div class="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/8/88/Gorga_Batak_Toba.svg')] bg-repeat opacity-30 animate-spin-slow"
+                    style="background-size: 400px;"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-batak-dark via-transparent to-batak-dark"></div>
+            </div>
+
+            <!-- Floating Flowers (CSS/Icon based) -->
+            <div class="absolute top-0 left-0 text-batak-gold/20 text-9xl animate-float pointer-events-none"
+                style="animation-delay: 0s;">
+                <i class="fas fa-leaf transform rotate-45"></i>
+            </div>
+            <div class="absolute bottom-10 right-0 text-batak-gold/20 text-9xl animate-float pointer-events-none"
+                style="animation-delay: 2s;">
+                <i class="fas fa-spa transform -rotate-45"></i>
+            </div>
+            <div class="absolute top-1/2 left-10 text-batak-red/10 text-8xl animate-pulse pointer-events-none">
+                <i class="fas fa-fan fa-spin" style="animation-duration: 10s;"></i>
+            </div>
+
+            <!-- Decorative Borders (Ulos Style) -->
+            <div
+                class="absolute top-10 left-10 w-32 h-32 border-t-4 border-l-4 border-batak-gold/40 rounded-tl-3xl animate-pulse-glow">
+            </div>
+            <div
+                class="absolute bottom-10 right-10 w-32 h-32 border-b-4 border-r-4 border-batak-gold/40 rounded-br-3xl animate-pulse-glow">
+            </div>
+
+            <div class="max-w-6xl mx-auto text-center relative z-10">
+                <div class="mb-16">
+                    <h2 class="text-5xl md:text-7xl font-serif text-batak-gold mb-2 relative inline-block animate-float"
+                        style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
+                        Mempelai
+                    </h2>
+                    <div class="flex justify-center items-center gap-4 text-batak-red-light opacity-80 mt-2">
+                        <i class="fas fa-fan fa-spin"></i>
+                        <p class="text-white/80 text-sm tracking-[0.3em] uppercase">Batak Toba Traditional Wedding</p>
+                        <i class="fas fa-fan fa-spin"></i>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-center items-center gap-16 md:gap-32">
+                    <!-- Groom -->
+                    <div class="flex flex-col items-center group relative" id="groom-card">
+                        <div class="relative w-72 h-72 mb-8">
+                            <!-- Rotating outer borders with Batak essence -->
+                            <div class="absolute inset-0 border-2 border-batak-gold/60 rounded-full transform scale-110 animate-spin-slow"
+                                style="border-style: double;"></div>
+                            <div
+                                class="absolute inset-0 border-4 border-dotted border-batak-red/40 rounded-full transform scale-125 animate-[spin_20s_linear_infinite_reverse]">
+                            </div>
+
+                            <!-- Floral Accent on Frame -->
+                            <div class="absolute -top-4 -right-4 text-batak-gold text-4xl animate-bounce"><i
+                                    class="fas fa-leaf"></i></div>
+
+                            <img src="assets/pria.jpg" alt="Groom"
+                                class="w-full h-full object-cover rounded-full border-4 border-batak-dark relative z-10 shadow-2xl grayscale group-hover:grayscale-0 transition-all duration-700">
+                        </div>
+                        <h3 class="text-4xl font-serif text-white mb-1 drop-shadow-md">Raja Batak</h3>
+                        <p class="text-batak-gold font-bold mb-4 tracking-wider">Putra Pertama</p>
+                        <p class="text-gray-300 text-sm italic">Putra dari Bpk. Raja & Ibu Ratu</p>
+                    </div>
+
+                    <div class="text-7xl font-serif text-batak-gold/50 animate-pulse font-italic relative">
+                        &
+                        <i class="fas fa-heart text-2xl text-batak-red absolute top-0 -right-4 animate-bounce"></i>
+                    </div>
+
+                    <!-- Bride -->
+                    <div class="flex flex-col items-center group relative" id="bride-card">
+                        <div class="relative w-72 h-72 mb-8">
+                            <!-- Rotating outer borders -->
+                            <div class="absolute inset-0 border-2 border-batak-gold/60 rounded-full transform scale-110 animate-[spin_15s_linear_infinite_reverse]"
+                                style="border-style: double;"></div>
+                            <div
+                                class="absolute inset-0 border-4 border-dotted border-batak-red/40 rounded-full transform scale-125 animate-spin-slow">
+                            </div>
+
+                            <!-- Floral Accent on Frame -->
+                            <div class="absolute -bottom-4 -left-4 text-batak-gold text-4xl animate-bounce"
+                                style="animation-delay: 1s;"><i class="fas fa-leaf"></i></div>
+
+                            <img src="assets/wanita.jpg" alt="Bride"
+                                class="w-full h-full object-cover rounded-full border-4 border-batak-dark relative z-10 shadow-2xl grayscale group-hover:grayscale-0 transition-all duration-700">
+                        </div>
+                        <h3 class="text-4xl font-serif text-white mb-1 drop-shadow-md">Ratu Uli</h3>
+                        <p class="text-batak-gold font-bold mb-4 tracking-wider">Putri Kedua</p>
+                        <p class="text-gray-300 text-sm italic">Putri dari Bpk. Uli & Ibu Cantik</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Event Section -->
+        <section id="event" class="py-20 px-4 bg-batak-cream text-batak-dark relative overflow-hidden">
+            <!-- decorative gorga pattern top/bottom -->
+            <div class="absolute top-0 left-0 right-0 h-4 gorga-border"></div>
+            <div class="absolute bottom-0 left-0 right-0 h-4 gorga-border"></div>
+
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-serif text-center text-batak-red mb-16">Acara Pernikahan</h2>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Akad/Blessing -->
+                    <div
+                        class="bg-white p-8 rounded-lg shadow-xl border-l-4 border-batak-gold transform hover:-translate-y-2 transition-transform duration-300">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div
+                                class="w-12 h-12 bg-batak-red text-white flex items-center justify-center rounded-full text-xl shadow-lg">
+                                <i class="fas fa-church"></i>
+                            </div>
+                            <h3 class="text-2xl font-serif font-bold text-batak-red">Pemberkatan (Martumpol)</h3>
+                        </div>
+                        <div class="space-y-4 text-gray-700">
+                            <div class="flex items-start gap-4">
+                                <i class="far fa-clock mt-1 text-batak-gold"></i>
+                                <div>
+                                    <p class="font-bold">Minggu, 05 November 2026</p>
+                                    <p>09:00 WIB - Selesai</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <i class="fas fa-map-marker-alt mt-1 text-batak-gold"></i>
+                                <div>
+                                    <p class="font-bold">Gereja HKBP Pusat</p>
+                                    <p class="text-sm">Jl. Gereja No. 1, Tarutung</p>
+                                </div>
+                            </div>
+                            <!-- Google Maps Embed -->
+                            <div class="mt-4 rounded-lg overflow-hidden shadow-md">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127488.02897339245!2d98.93!3d2.03!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x302e050a0000000f%3A0x30c4b20e30000000!2sTarutung%2C%20North%20Tapanuli%20Regency%2C%20North%20Sumatra!5e0!3m2!1sen!2sid!4v1234567890123!5m2!1sen!2sid"
+                                    width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reception -->
+                    <div
+                        class="bg-white p-8 rounded-lg shadow-xl border-l-4 border-batak-red transform hover:-translate-y-2 transition-transform duration-300">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div
+                                class="w-12 h-12 bg-batak-gold text-white flex items-center justify-center rounded-full text-xl shadow-lg">
+                                <i class="fas fa-glass-cheers"></i>
+                            </div>
+                            <h3 class="text-2xl font-serif font-bold text-batak-red">Resepsi Adat</h3>
+                        </div>
+                        <div class="space-y-4 text-gray-700">
+                            <div class="flex items-start gap-4">
+                                <i class="far fa-clock mt-1 text-batak-gold"></i>
+                                <div>
+                                    <p class="font-bold">Sabtu, 20 November 2026</p>
+                                    <p>11:00 WIB - Selesai</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <i class="fas fa-map-marker-alt mt-1 text-batak-gold"></i>
+                                <div>
+                                    <p class="font-bold">Gedung Serbaguna Tarutung</p>
+                                    <p class="text-sm">Jl. Sisingamangaraja No. 88</p>
+                                </div>
+                            </div>
+                            <!-- Google Maps Embed -->
+                            <div class="mt-4 rounded-lg overflow-hidden shadow-md">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127488.02897339245!2d98.93!3d2.03!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x302e050a0000000f%3A0x30c4b20e30000000!2sTarutung%2C%20North%20Tapanuli%20Regency%2C%20North%20Sumatra!5e0!3m2!1sen!2sid!4v1234567890123!5m2!1sen!2sid"
+                                    width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-20 px-4 bg-batak-dark relative overflow-hidden">
+            <!-- Background Image from Assets -->
+            <div class="absolute inset-0 bg-cover bg-center opacity-20 pointer-events-none"
+                style="background-image: url('assets/ulos.jpg');"></div>
+            <!-- Gradient Overlay for readability -->
+            <div
+                class="absolute inset-0 bg-gradient-to-b from-batak-dark via-transparent to-batak-dark pointer-events-none">
+            </div>
+
+            <div class="max-w-6xl mx-auto text-center relative z-10">
+                <h2 class="text-4xl md:text-5xl font-serif text-batak-gold mb-12">Galeri Foto</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="relative group overflow-hidden rounded-lg aspect-[3/4] cursor-pointer"
+                        data-lightbox="gallery">
+                        <img src="assets/galery1.jpg"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            alt="Gallery 1">
+                    </div>
+                    <div class="relative group overflow-hidden rounded-lg aspect-[3/4] cursor-pointer"
+                        data-lightbox="gallery">
+                        <img src="assets/galery2.jpg"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            alt="Gallery 2">
+                    </div>
+                    <div class="relative group overflow-hidden rounded-lg aspect-[3/4] cursor-pointer"
+                        data-lightbox="gallery">
+                        <img src="assets/galery3.jpg"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            alt="Gallery 3">
+                    </div>
+                    <div class="relative group overflow-hidden rounded-lg aspect-[3/4] cursor-pointer"
+                        data-lightbox="gallery">
+                        <img src="assets/galery4.jpg"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            alt="Gallery 4">
+                    </div>
+                    <div class="relative group overflow-hidden rounded-lg aspect-[3/4] cursor-pointer"
+                        data-lightbox="gallery">
+                        <img src="assets/galery5.jpg"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            alt="Gallery 5">
+                    </div>
+                    <div class="relative group overflow-hidden rounded-lg aspect-[3/4] cursor-pointer"
+                        data-lightbox="gallery">
+                        <img src="assets/galery6.jpg"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            alt="Gallery 6">
+                    </div>
+                    <div class="relative group overflow-hidden rounded-lg aspect-[3/4] cursor-pointer"
+                        data-lightbox="gallery">
+                        <img src="assets/galery7.jpg"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            alt="Gallery 7">
+                    </div>
+                    <div class="relative group overflow-hidden rounded-lg aspect-[3/4] cursor-pointer"
+                        data-lightbox="gallery">
+                        <img src="assets/galery8.jpg"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            alt="Gallery 8">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP Section -->
+        <section id="rsvp" class="py-20 px-4 bg-batak-dark relative">
+            <div class="absolute inset-0 bg-batak-red/10"></div>
+            <div
+                class="max-w-3xl mx-auto relative z-10 bg-batak-dark/90 backdrop-blur border border-batak-gold/30 p-10 md:p-14 rounded-lg shadow-2xl text-center">
+                <h2 class="text-3xl md:text-5xl font-serif text-batak-gold mb-6">Konfirmasi Kehadiran</h2>
+                <p class="text-gray-300 mb-10 text-lg">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
+                    Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
+
+                <a href="https://wa.me/6281234567890?text=Horas!%20Saya%20berencana%20hadir%20di%20pernikahan%20Raja%20%26%20Ratu.%20Terima%20kasih."
+                    target="_blank"
+                    class="inline-flex items-center gap-3 px-8 py-4 bg-[#25D366] text-white font-bold rounded-full hover:bg-[#128C7E] transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(37,211,102,0.5)]">
+                    <i class="fab fa-whatsapp text-3xl"></i>
+                    <span class="text-lg tracking-wider uppercase">Saya Akan Datang</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-batak-dark border-t border-batak-gold/30 py-8 text-center px-4">
+            <h2 class="text-2xl font-serif text-batak-gold mb-4">Raja & Ratu</h2>
+            <p class="text-gray-500 text-sm mb-4">Terima kasih atas doa dan restu Bapak/Ibu/Saudara/i</p>
+            <p class="text-gray-600 text-xs">Created with <i class="fas fa-heart text-batak-red"></i> by Antigravity</p>
+        </footer>
+
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox"
+        class="fixed inset-0 bg-black/95 z-[100] hidden items-center justify-center p-4 backdrop-blur-sm">
+        <button id="lightbox-close"
+            class="absolute top-6 right-6 text-white text-4xl hover:text-batak-gold transition-colors z-10">
+            <i class="fas fa-times"></i>
+        </button>
+        <button id="lightbox-prev"
+            class="absolute left-6 top-1/2 -translate-y-1/2 text-white text-4xl hover:text-batak-gold transition-colors z-10">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button id="lightbox-next"
+            class="absolute right-6 top-1/2 -translate-y-1/2 text-white text-4xl hover:text-batak-gold transition-colors z-10">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <img id="lightbox-img" src="" alt="Gallery"
+            class="max-h-[90vh] max-w-[90vw] object-contain rounded-lg shadow-2xl">
+    </div>
+
+    <script src="./main.js"></script>
+    <script>
+        // Additional animations for scroll
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.id === 'groom-card') {
+                        entry.target.classList.remove('opacity-0', 'translate-y-10');
+                    }
+                    if (entry.target.id === 'bride-card') {
+                        entry.target.classList.remove('opacity-0', 'translate-y-10');
+                    }
+                    if (entry.target.id === 'couple-amp') {
+                        entry.target.classList.remove('opacity-0', 'scale-50');
+                    }
+                }
+            });
+        }, { threshold: 0.3 });
+
+        setTimeout(() => {
+            const groom = document.getElementById('groom-card');
+            const bride = document.getElementById('bride-card');
+            const amp = document.getElementById('couple-amp');
+            if (groom) scrollObserver.observe(groom);
+            if (bride) scrollObserver.observe(bride);
+            if (amp) scrollObserver.observe(amp);
+        }, 1000);
+    </script>
+</body>
+
+</html>
