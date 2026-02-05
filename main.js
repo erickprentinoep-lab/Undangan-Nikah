@@ -5,6 +5,13 @@ const openBtn = document.getElementById('open-btn');
 const scIframe = document.getElementById('sc-widget');
 const widget = SC.Widget(scIframe);
 
+// Ensure widget is ready before use
+let widgetReady = false;
+widget.bind(SC.Widget.Events.READY, function () {
+    widgetReady = true;
+    console.log('SoundCloud widget ready');
+});
+
 // Open Invitation Function
 openBtn.addEventListener('click', () => {
     // Hide Overlay
@@ -18,14 +25,22 @@ openBtn.addEventListener('click', () => {
         }, 100);
     }, 1000);
 
-    // Play Music via Widget
-    widget.play();
-
-    // Ensure Loop
-    widget.bind(SC.Widget.Events.FINISH, function () {
-        widget.seekTo(0);
+    // Play Music via Widget (with fallback)
+    setTimeout(() => {
         widget.play();
-    });
+        widget.setVolume(80); // Set volume to 80%
+
+        // Ensure Loop
+        widget.bind(SC.Widget.Events.FINISH, function () {
+            widget.seekTo(0);
+            widget.play();
+        });
+
+        // Error handling
+        widget.bind(SC.Widget.Events.ERROR, function () {
+            console.warn('SoundCloud playback error - this may be due to browser autoplay restrictions');
+        });
+    }, 500); // Small delay to ensure widget is ready
 });
 
 // Music Toggle Logic Removed
