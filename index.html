@@ -197,6 +197,123 @@
         ::-webkit-scrollbar {
             width: 0px;
         }
+
+        /* ====================================== */
+        /* FLOWER BLOOMING ANIMATION */
+        /* ====================================== */
+        #flower-bloom {
+            position: fixed;
+            inset: 0;
+            z-index: 60;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle, rgba(15, 15, 15, 0.95) 0%, rgba(0, 0, 0, 1) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        #flower-bloom.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .flower-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+
+        .petal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150px;
+            height: 250px;
+            background: radial-gradient(ellipse at center, #d4af37 0%, #a61c1c 70%, #5c0909 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            transform-origin: center bottom;
+            opacity: 0;
+            box-shadow:
+                0 0 30px rgba(212, 175, 55, 0.6),
+                inset 0 -20px 40px rgba(0, 0, 0, 0.3);
+            animation: bloom 2s ease-out forwards;
+        }
+
+        /* Position petals in circle */
+        .petal:nth-child(1) {
+            transform: translate(-50%, -100%) rotate(0deg) scale(0);
+            animation-delay: 0s;
+        }
+
+        .petal:nth-child(2) {
+            transform: translate(-50%, -100%) rotate(60deg) scale(0);
+            animation-delay: 0.1s;
+        }
+
+        .petal:nth-child(3) {
+            transform: translate(-50%, -100%) rotate(120deg) scale(0);
+            animation-delay: 0.2s;
+        }
+
+        .petal:nth-child(4) {
+            transform: translate(-50%, -100%) rotate(180deg) scale(0);
+            animation-delay: 0.3s;
+        }
+
+        .petal:nth-child(5) {
+            transform: translate(-50%, -100%) rotate(240deg) scale(0);
+            animation-delay: 0.4s;
+        }
+
+        .petal:nth-child(6) {
+            transform: translate(-50%, -100%) rotate(300deg) scale(0);
+            animation-delay: 0.5s;
+        }
+
+        @keyframes bloom {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -100%) rotate(var(--rotation, 0deg)) scale(0);
+            }
+
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -100%) rotate(var(--rotation, 0deg)) scale(1.1);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -100%) rotate(var(--rotation, 0deg)) scale(1);
+            }
+        }
+
+        .flower-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #d4af37 0%, #a67c00 100%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            animation: centerBloom 1.5s ease-out 0.8s forwards;
+            box-shadow:
+                0 0 40px rgba(212, 175, 55, 0.8),
+                inset 0 -10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes centerBloom {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 
@@ -216,6 +333,19 @@
     <div class="ornament ornament-tr"></div>
     <div class="ornament ornament-bl"></div>
     <div class="ornament ornament-br"></div>
+
+    <!-- Flower Blooming Animation -->
+    <div id="flower-bloom">
+        <div class="flower-container">
+            <div class="petal" style="--rotation: 0deg;"></div>
+            <div class="petal" style="--rotation: 60deg;"></div>
+            <div class="petal" style="--rotation: 120deg;"></div>
+            <div class="petal" style="--rotation: 180deg;"></div>
+            <div class="petal" style="--rotation: 240deg;"></div>
+            <div class="petal" style="--rotation: 300deg;"></div>
+            <div class="flower-center"></div>
+        </div>
+    </div>
 
     <!-- Overlay -->
     <section id="overlay"

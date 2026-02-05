@@ -14,16 +14,32 @@ widget.bind(SC.Widget.Events.READY, function () {
 
 // Open Invitation Function
 openBtn.addEventListener('click', () => {
-    // Hide Overlay
+    const flowerBloom = document.getElementById('flower-bloom');
+
+    // 1. Hide Overlay first
     overlay.classList.add('-translate-y-full');
+
     setTimeout(() => {
         overlay.style.display = 'none';
-        // Show Main Content
-        mainContent.classList.remove('hidden');
+
+        // 2. Show Flower Animation
+        flowerBloom.classList.add('active');
+
+        // 3. After flower blooms (2.5s animation), fade it out and show main content
         setTimeout(() => {
-            mainContent.classList.remove('opacity-0');
-        }, 100);
-    }, 1000);
+            // Fade out flower
+            flowerBloom.style.opacity = '0';
+
+            // Show main content
+            mainContent.classList.remove('hidden');
+            setTimeout(() => {
+                mainContent.classList.remove('opacity-0');
+                // Remove flower from DOM
+                flowerBloom.classList.remove('active');
+                flowerBloom.style.opacity = '1'; // Reset for next time
+            }, 500);
+        }, 2500); // Wait for flower bloom to complete
+    }, 800);
 
     // Play Music via Widget (with fallback)
     setTimeout(() => {
