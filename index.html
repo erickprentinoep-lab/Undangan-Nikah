@@ -199,121 +199,103 @@
         }
 
         /* ====================================== */
-        /* FLOWER BLOOMING ANIMATION */
+        /* HEART BLOOMING ANIMATION */
         /* ====================================== */
-        #flower-bloom {
+        #heart-bloom {
             position: fixed;
             inset: 0;
             z-index: 60;
             display: none;
             align-items: center;
             justify-content: center;
-            background: radial-gradient(circle, rgba(15, 15, 15, 0.95) 0%, rgba(0, 0, 0, 1) 100%);
+            background: radial-gradient(circle, rgba(20, 0, 0, 0.98) 0%, rgba(0, 0, 0, 1) 100%);
             opacity: 0;
             transition: opacity 0.5s ease;
         }
 
-        #flower-bloom.active {
+        #heart-bloom.active {
             display: flex;
             opacity: 1;
         }
 
-        .flower-container {
+        .heart-container {
             position: relative;
-            width: 400px;
-            height: 400px;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .petal {
+        .heart-main {
+            position: relative;
+            width: 100px;
+            height: 90px;
+            transform: scale(0);
+            animation: heartBloom 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            filter: drop-shadow(0 0 30px rgba(166, 28, 28, 0.8));
+        }
+
+        .heart-main::before,
+        .heart-main::after {
+            content: "";
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 150px;
-            height: 250px;
-            background: radial-gradient(ellipse at center, #d4af37 0%, #a61c1c 70%, #5c0909 100%);
-            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-            transform-origin: center bottom;
-            opacity: 0;
-            box-shadow:
-                0 0 30px rgba(212, 175, 55, 0.6),
-                inset 0 -20px 40px rgba(0, 0, 0, 0.3);
-            animation: bloom 2s ease-out forwards;
-        }
-
-        /* Position petals in circle */
-        .petal:nth-child(1) {
-            transform: translate(-50%, -100%) rotate(0deg) scale(0);
-            animation-delay: 0s;
-        }
-
-        .petal:nth-child(2) {
-            transform: translate(-50%, -100%) rotate(60deg) scale(0);
-            animation-delay: 0.1s;
-        }
-
-        .petal:nth-child(3) {
-            transform: translate(-50%, -100%) rotate(120deg) scale(0);
-            animation-delay: 0.2s;
-        }
-
-        .petal:nth-child(4) {
-            transform: translate(-50%, -100%) rotate(180deg) scale(0);
-            animation-delay: 0.3s;
-        }
-
-        .petal:nth-child(5) {
-            transform: translate(-50%, -100%) rotate(240deg) scale(0);
-            animation-delay: 0.4s;
-        }
-
-        .petal:nth-child(6) {
-            transform: translate(-50%, -100%) rotate(300deg) scale(0);
-            animation-delay: 0.5s;
-        }
-
-        @keyframes bloom {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -100%) rotate(var(--rotation, 0deg)) scale(0);
-            }
-
-            50% {
-                opacity: 1;
-                transform: translate(-50%, -100%) rotate(var(--rotation, 0deg)) scale(1.1);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translate(-50%, -100%) rotate(var(--rotation, 0deg)) scale(1);
-            }
-        }
-
-        .flower-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 80px;
+            left: 50px;
+            top: 0;
+            width: 50px;
             height: 80px;
-            background: radial-gradient(circle, #d4af37 0%, #a67c00 100%);
-            border-radius: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            animation: centerBloom 1.5s ease-out 0.8s forwards;
-            box-shadow:
-                0 0 40px rgba(212, 175, 55, 0.8),
-                inset 0 -10px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to bottom, #d4af37, #a61c1c);
+            border-radius: 50px 50px 0 0;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+            box-shadow: inset -5px -5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        @keyframes centerBloom {
+        .heart-main::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        @keyframes heartBloom {
             0% {
-                transform: translate(-50%, -50%) scale(0);
+                transform: scale(0) translateY(50px);
                 opacity: 0;
             }
 
+            60% {
+                transform: scale(1.5) translateY(-20px);
+                opacity: 1;
+            }
+
             100% {
-                transform: translate(-50%, -50%) scale(1);
+                transform: scale(1.2) translateY(0);
                 opacity: 1;
             }
         }
+
+        .heart-glow {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: glowPulse 2s ease-out infinite alternate;
+        }
+
+        @keyframes glowPulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: scale(1.5);
+                opacity: 0.7;
+            }
+        }
+
 
         /* ====================================== */
         /* UNIQUE SECTION ANIMATIONS */
@@ -363,6 +345,7 @@
             pointer-events: none;
             overflow: hidden;
             z-index: 5;
+            width: 100%;
         }
 
         .heart {
@@ -488,14 +471,14 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 80px;
+            height: 60px;
             background: linear-gradient(135deg, #a61c1c 0%, #5c0909 100%);
             transform-origin: top;
             transform: rotateX(0deg);
             transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             border: 2px solid #d4af37;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            z-index: 2;
+            z-index: 10;
         }
 
         .envelope-container.opened .envelope-flap {
@@ -521,8 +504,9 @@
     <!-- SoundCloud Widget API -->
     <script src="https://w.soundcloud.com/player/api.js"></script>
 
-    <!-- SoundCloud Iframe (Hidden) -->
-    <iframe id="sc-widget" class="hidden" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+    <!-- SoundCloud Iframe (Hidden but active) -->
+    <iframe id="sc-widget" style="position: absolute; left: -9999px; visibility: hidden; width: 0; height: 0;"
+        width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
         src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/joe-silalahi-221084110/dongan-matua-teman-hidup-enny&color=%23d4af37&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&loop=true">
     </iframe>
 
@@ -532,16 +516,11 @@
     <div class="ornament ornament-bl"></div>
     <div class="ornament ornament-br"></div>
 
-    <!-- Flower Blooming Animation -->
-    <div id="flower-bloom">
-        <div class="flower-container">
-            <div class="petal" style="--rotation: 0deg;"></div>
-            <div class="petal" style="--rotation: 60deg;"></div>
-            <div class="petal" style="--rotation: 120deg;"></div>
-            <div class="petal" style="--rotation: 180deg;"></div>
-            <div class="petal" style="--rotation: 240deg;"></div>
-            <div class="petal" style="--rotation: 300deg;"></div>
-            <div class="flower-center"></div>
+    <!-- Heart Blooming Animation -->
+    <div id="heart-bloom">
+        <div class="heart-container">
+            <div class="heart-glow"></div>
+            <div class="heart-main"></div>
         </div>
     </div>
 
@@ -887,7 +866,7 @@
         </section>
 
         <!-- Gallery Section -->
-        <section id="gallery" class="py-20 px-4 bg-batak-dark relative overflow-hidden">
+        <section id="gallery" class="py-20 px-4 bg-batak-dark relative overflow-hidden z-[40]">
             <!-- Background Image from Assets -->
             <div class="absolute inset-0 bg-cover bg-center opacity-20 pointer-events-none"
                 style="background-image: url('assets/ulos.jpg');"></div>
@@ -955,7 +934,7 @@
         <section id="rsvp" class="py-40 px-4 bg-batak-dark relative overflow-hidden">
             <div class="absolute inset-0 bg-batak-red/10"></div>
             <div
-                class="envelope-container max-w-3xl mx-auto relative z-10 bg-batak-dark/90 backdrop-blur border border-batak-gold/30 p-10 md:p-14 rounded-lg shadow-2xl text-center">
+                class="envelope-container mt-20 max-w-3xl mx-auto relative z-10 bg-batak-dark/90 backdrop-blur border border-batak-gold/30 p-10 md:p-14 rounded-lg shadow-2xl text-center">
                 <div class="envelope-flap"></div>
                 <div class="envelope-content">
                     <h2 class="text-3xl md:text-5xl font-serif text-batak-gold mb-6">Konfirmasi Kehadiran</h2>

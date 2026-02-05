@@ -14,49 +14,49 @@ widget.bind(SC.Widget.Events.READY, function () {
 
 // Open Invitation Function
 openBtn.addEventListener('click', () => {
-    const flowerBloom = document.getElementById('flower-bloom');
+    const heartBloom = document.getElementById('heart-bloom');
 
-    // 1. Hide Overlay first
+    // 1. Play Music IMMEDIATELY
+    widget.play();
+    widget.setVolume(100);
+
+    // Backup play call after a short delay (still inside user gesture handled block)
+    setTimeout(() => {
+        widget.play();
+    }, 100);
+
+    // 2. Hide Overlay
     overlay.classList.add('-translate-y-full');
 
     setTimeout(() => {
         overlay.style.display = 'none';
 
-        // 2. Show Flower Animation
-        flowerBloom.classList.add('active');
+        // 3. Show Heart Animation
+        heartBloom.classList.add('active');
 
-        // 3. After flower blooms (2.5s animation), fade it out and show main content
+        // 4. Reveal main content after heart blooming
         setTimeout(() => {
-            // Fade out flower
-            flowerBloom.style.opacity = '0';
-
-            // Show main content
+            heartBloom.style.opacity = '0';
             mainContent.classList.remove('hidden');
             setTimeout(() => {
                 mainContent.classList.remove('opacity-0');
-                // Remove flower from DOM
-                flowerBloom.classList.remove('active');
-                flowerBloom.style.opacity = '1'; // Reset for next time
+                heartBloom.classList.remove('active');
+                heartBloom.style.opacity = '1';
             }, 500);
-        }, 2500); // Wait for flower bloom to complete
+        }, 2000);
     }, 800);
 
-    // Play Music via Widget (with fallback)
-    setTimeout(() => {
+    // Ensure Loop & Error Handling
+    widget.bind(SC.Widget.Events.FINISH, function () {
+        widget.seekTo(0);
         widget.play();
-        widget.setVolume(80); // Set volume to 80%
+    });
 
-        // Ensure Loop
-        widget.bind(SC.Widget.Events.FINISH, function () {
-            widget.seekTo(0);
-            widget.play();
-        });
-
-        // Error handling
-        widget.bind(SC.Widget.Events.ERROR, function () {
-            console.warn('SoundCloud playback error - this may be due to browser autoplay restrictions');
-        });
-    }, 500); // Small delay to ensure widget is ready
+    widget.bind(SC.Widget.Events.ERROR, function (err) {
+        console.error('SoundCloud error:', err);
+        // Retry playing on error if it's a common one
+        setTimeout(() => widget.play(), 1000);
+    });
 });
 
 // Music Toggle Logic Removed
