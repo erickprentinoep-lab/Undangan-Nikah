@@ -122,7 +122,32 @@ const observerOptions = {
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
+            // Default reveal
             entry.target.classList.add('animate-fadeInUp');
+
+            // Curtain reveal
+            if (entry.target.classList.contains('curtain-reveal')) {
+                entry.target.classList.add('revealed');
+            }
+
+            // 3D Flip in
+            const flipItems = entry.target.querySelectorAll('.flip-in');
+            flipItems.forEach(item => item.classList.add('flipped'));
+
+            // Cascade items
+            const cascadeItems = entry.target.querySelectorAll('.cascade-item');
+            cascadeItems.forEach(item => item.classList.add('cascaded'));
+
+            // Envelope open
+            const envelope = entry.target.querySelector('.envelope-container');
+            if (envelope) {
+                envelope.classList.add('opened');
+            }
+
+            // Start hearts for couple section
+            if (entry.target.id === 'couple') {
+                startHearts();
+            }
         }
     });
 }, observerOptions);
@@ -130,6 +155,27 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('section').forEach(section => {
     observer.observe(section);
 });
+
+// Heart Particle Generation System
+function startHearts() {
+    const container = document.getElementById('hearts-container');
+    if (!container || container.children.length > 0) return;
+
+    setInterval(() => {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        heart.style.opacity = Math.random();
+
+        container.appendChild(heart);
+
+        // Remove after animation
+        setTimeout(() => {
+            heart.remove();
+        }, 6000);
+    }, 400);
+}
 
 // ========================================
 // GALLERY LIGHTBOX FUNCTIONALITY
